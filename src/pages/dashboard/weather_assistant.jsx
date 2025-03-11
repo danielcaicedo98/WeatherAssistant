@@ -56,7 +56,7 @@ export function WeatherAssistant() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-blue-500 to-blue-700 text-white p-4">
       {screen === "welcome" && (
         <Card className="p-6 text-center max-w-md bg-white text-black rounded-2xl shadow-xl">
-          <h1 className="text-2xl font-bold">WeatherBot</h1>
+          <h1 className="text-2xl font-bold">WeatherAssistant</h1>
           <p className="mt-2">Tu asistente meteorológico en Cali</p>
           <Button onClick={() => setScreen("menu")} className="mt-4 bg-blue-500 hover:bg-blue-600 text-white w-full">Comenzar</Button>
         </Card>
