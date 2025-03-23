@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import {  } from "@/components/ui/button";
 import { Card, CardContent, Button } from "@material-tailwind/react";
 import { Sun, CloudRain, AlertCircle, Settings, ArrowLeft, History } from "lucide-react";
@@ -8,10 +8,19 @@ import WeatherAlerts from "./weather_alerts";
 import Sugestions from "./sugestions";
 import WeatherSettings from "./weather_settings";
 import WeatherHistory from "./weather_history";
+import { useNavigate } from "react-router-dom";
 
 export function WeatherAssistant() {
   const [screen, setScreen] = useState("welcome");
+  const navigate = useNavigate();
+  useEffect(() => {
+    const isLogged = localStorage.getItem("is_logged") === "true";
+    if (!isLogged) {
+      navigate("/auth/sign-in");
 
+    }
+  }
+    , []);
   const menuOptions = [
     { 
       id: "current", 

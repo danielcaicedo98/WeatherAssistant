@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Typography,
   Card,
@@ -26,8 +26,19 @@ import {
   ordersOverviewData,
 } from "@/data";
 import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
+import { useNavigate } from "react-router-dom";
 
 export function Home() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const isLogged = localStorage.getItem("is_logged") === "true";
+    if (!isLogged) {
+      // Si no está logueado, redirigir al login
+      navigate("/auth/sign-in");
+
+    }
+  }
+    , []);
   return (
     <div className="mt-12">
       <div className="mb-12 grid gap-y-10 gap-x-8 md:grid-cols-2 xl:grid-cols-2">
