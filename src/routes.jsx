@@ -5,7 +5,6 @@ import {
   RectangleStackIcon,
 } from "@heroicons/react/24/solid";
 import { Home, Notifications, WeatherAssistant } from "@/pages/dashboard";
-import { ThermometerSun } from "lucide-react"
 import { SignIn, SignUp } from "@/pages/auth";
 
 const icon = {
@@ -23,21 +22,20 @@ export const routes = [
         element: <Home />,
       },
       {
-        icon: <ThermometerSun {...icon} />,
+        icon: <InformationCircleIcon {...icon} />,
         name: "Asistente",
         path: "/assistant",
         element: <WeatherAssistant />,
-      },      
+      },
       {
         icon: <InformationCircleIcon {...icon} />,
-        name: "notifications",
+        name: "notificaciones",
         path: "/notifications",
         element: <Notifications />,
       },
     ],
   },
   {
-    title: "auth pages",
     layout: "auth",
     pages: [
       {
