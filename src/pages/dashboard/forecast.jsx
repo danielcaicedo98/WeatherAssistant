@@ -3,7 +3,7 @@ import axios from "axios"; // Importamos Axios para realizar solicitudes HTTP
 
 // Definimos la clave de API y la URL base de WeatherAPI
 const API_KEY = "15d4466459384ee996c03456251103";
-const BASE_URL = "http://api.weatherapi.com/v1";
+const BASE_URL = "https://api.weatherapi.com/v1";
 
 const Forecast = () => {
   // Definimos el estado para almacenar el pronóstico del clima
