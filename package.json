@@ -12,6 +12,7 @@
     "@heroicons/react": "2.0.18",
     "@material-tailwind/react": "2.1.4",
     "apexcharts": "3.44.0",
+    "axios": "^1.8.4",
     "firebase": "11.4.0",
     "lucide-react": "^0.479.0",
     "prop-types": "15.8.1",
