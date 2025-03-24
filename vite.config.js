@@ -11,4 +11,7 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./setupTests.js",
   },
+  build: {
+    target: ['esnext'],  // Especifica un target más moderno que soporte top-level await
+  }
 });
