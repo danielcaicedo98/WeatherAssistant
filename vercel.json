@@ -1,0 +1,6 @@
+{
+    "name": "weather-assistant",
+    "buildCommand": "vite build",
+    "outputDirectory": "dist"
+}
+  
