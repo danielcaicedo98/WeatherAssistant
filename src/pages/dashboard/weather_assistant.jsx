@@ -22,43 +22,43 @@ export function WeatherAssistant() {
   }
     , []);
   const menuOptions = [
-    { 
-      id: "current", 
-      label: "Clima Actual", 
-      icon: <Sun className="w-6 h-6" />, 
-      response: <CurrentWeather/>
-    },
-    { 
-      id: "forecast", 
-      label: "Pronóstico 3 días", 
-      icon: <CloudRain className="w-6 h-6" />,
-      response: <Forecast/>
-    },
-    { 
-      id: "alerts", 
-      label: "Alertas Meteorológicas", 
-      icon: <AlertCircle className="w-6 h-6" />,
-      response: <WeatherAlerts/> 
-    },
-    { 
-      id: "suggestions", 
-      label: "Sugerencias", 
+    {
+      id: "current",
+      label: "Clima Actual",
       icon: <Sun className="w-6 h-6" />,
-      response: <Sugestions/>
-     },
-     { 
-      id: "history", 
-      label: "Historico", 
-      icon: <History className="w-6 h-6" />, 
-      response: <WeatherHistory/>
+      response: <CurrentWeather />
     },
-    { 
+    {
+      id: "forecast",
+      label: "Pronóstico 3 días",
+      icon: <CloudRain className="w-6 h-6" />,
+      response: <Forecast />
+    },
+    {
+      id: "alerts",
+      label: "Alertas Meteorológicas",
+      icon: <AlertCircle className="w-6 h-6" />,
+      response: <WeatherAlerts />
+    },
+    {
+      id: "suggestions",
+      label: "Sugerencias",
+      icon: <Sun className="w-6 h-6" />,
+      response: <Sugestions />
+    },
+    {
+      id: "history",
+      label: "Historico",
+      icon: <History className="w-6 h-6" />,
+      response: <WeatherHistory />
+    },
+    /* { 
       id: "settings", 
       label: "Configuración", 
       icon: <Settings className="w-6 h-6" />,
       response: <WeatherSettings/>
-    },
-    
+    }, */
+
   ];
 
   return (
