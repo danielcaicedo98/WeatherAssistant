@@ -1,6 +1,6 @@
 // src/data/weatherService.js
 const API_KEY = "15d4466459384ee996c03456251103";
-const BASE_URL = "http://api.weatherapi.com/v1";
+const BASE_URL = "https://api.weatherapi.com/v1";
 const LOCATION = "Cali"; 
 const LANG = "es"; 
 
