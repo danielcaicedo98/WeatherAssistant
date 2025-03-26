@@ -52,12 +52,12 @@ export function WeatherAssistant() {
       icon: <History className="w-6 h-6" />, 
       response: <WeatherHistory/>
     },
-    { 
+    /*{ 
       id: "settings", 
       label: "Configuración", 
       icon: <Settings className="w-6 h-6" />,
       response: <WeatherSettings/>
-    },
+    },*/
     
   ];
 
