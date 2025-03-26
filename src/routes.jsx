@@ -27,12 +27,12 @@ export const routes = [
         path: "/assistant",
         element: <WeatherAssistant />,
       },
-      {
+      /*{
         icon: <InformationCircleIcon {...icon} />,
         name: "notificaciones",
         path: "/notifications",
         element: <Notifications />,
-      },
+      },*/
     ],
   },
   {
