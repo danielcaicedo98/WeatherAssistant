@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 
 const WeatherData = () => {
@@ -6,54 +5,45 @@ const WeatherData = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Función para formatear la fecha como "YYYY-MM-DD"
-  const getDateString = (date) => date.toISOString().split('T')[0];
-
-  // Fecha de hoy
-  const today = new Date();
-  // Usamos hace dos días como fecha final para asegurarnos de que el día esté completo
-  const endDate = new Date(today);
-  endDate.setDate(today.getDate() - 2);
-  // Fecha de inicio: 7 días atrás (incluyendo el día final, se obtienen 7 días completos)
-  const startDate = new Date(today);
-  startDate.setDate(today.getDate() - 8);
-
-
-  const start_date_str = getDateString(startDate);
-  const end_date_str = getDateString(endDate);
-
-  // Coordenadas aproximadas de Cali, Colombia
-  const latitude = 3.4516;
-  const longitude = -76.5320;
+  const apiKey = "15d4466459384ee996c03456251103";
+  const location = 'Cali'; // Ciudad a consultar
 
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        // URL del endpoint histórico de Open-Meteo
-        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}&start_date=${start_date_str}&end_date=${end_date_str}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=America%2FBogota`;
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Error al obtener los datos del clima');
+        const promises = [];
+        for (let i = 1; i <= 7; i++) {
+          const date = getPastDate(i);
+          const url = `http://api.weatherapi.com/v1/history.json?key=${apiKey}&q=${location}&dt=${date}`;
+          promises.push(fetch(url).then((res) => res.json()));
         }
-        const data = await response.json();
-        setWeather(data.daily);
+        
+        const results = await Promise.all(promises);
+        const weatherData = results.map((data) => data.forecast.forecastday[0]);
+        setWeather(weatherData);
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
+    
     fetchWeather();
-  }, [start_date_str, end_date_str, latitude, longitude]);
+  }, [apiKey, location]);
+
+  const getPastDate = (daysAgo) => {
+    const date = new Date();
+    date.setDate(date.getDate() - daysAgo);
+    return date.toISOString().split('T')[0];
+  };
 
   if (loading) return <p>Cargando datos del clima...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
-      <h2>Clima en Cali, Colombia (Últimos 7 días)</h2>
-      {weather && weather.time ? (
+      <h2>Clima en {location}, Colombia (Últimos 7 días)</h2>
+      {weather.length > 0 ? (
         <table border="1" cellPadding="5" cellSpacing="0">
           <thead>
             <tr>
@@ -64,12 +54,12 @@ const WeatherData = () => {
             </tr>
           </thead>
           <tbody>
-            {weather.time.map((date, index) => (
-              <tr key={date}>
-                <td>{date}</td>
-                <td>{weather.temperature_2m_max[index]}</td>
-                <td>{weather.temperature_2m_min[index]}</td>
-                <td>{weather.precipitation_sum[index]}</td>
+            {weather.map((day) => (
+              <tr key={day.date}>
+                <td>{day.date}</td>
+                <td>{day.day.maxtemp_c}</td>
+                <td>{day.day.mintemp_c}</td>
+                <td>{day.day.totalprecip_mm}</td>
               </tr>
             ))}
           </tbody>
