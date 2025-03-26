@@ -3,14 +3,13 @@ import { AlertCircle } from "lucide-react";
 
 function WeatherAlerts() {
   const [alerts, setAlerts] = useState([]);
-  const latitude = 3.4516;
-  const longitude = -76.532;
-  const start_date_str = new Date().toISOString().split("T")[0];
-  const end_date_str = start_date_str;
+  const apiKey = "15d4466459384ee996c03456251103";
+  const location = "Cali";
+  const today = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
     const fetchWeatherData = async () => {
-      const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}&start_date=${start_date_str}&end_date=${end_date_str}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=America%2FBogota`;
+      const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=1`;
       
       try {
         const response = await fetch(url);
@@ -23,13 +22,13 @@ function WeatherAlerts() {
     };
 
     fetchWeatherData();
-  }, []);
+  }, [apiKey, location]);
 
   const checkForAlerts = (data) => {
     let warnings = [];
-    const maxTemp = data.daily.temperature_2m_max[0];
-    const minTemp = data.daily.temperature_2m_min[0];
-    const precipitation = data.daily.precipitation_sum[0];
+    const maxTemp = data.forecast.forecastday[0].day.maxtemp_c;
+    const minTemp = data.forecast.forecastday[0].day.mintemp_c;
+    const precipitation = data.forecast.forecastday[0].day.totalprecip_mm;
 
     if (maxTemp >= 35) {
       warnings.push("⚠️ Alerta de calor extremo en Cali. Se recomienda mantenerse hidratado y evitar exposición prolongada al sol.");
