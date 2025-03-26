@@ -14,7 +14,7 @@ const WeatherData = () => {
         const promises = [];
         for (let i = 1; i <= 7; i++) {
           const date = getPastDate(i);
-          const url = `http://api.weatherapi.com/v1/history.json?key=${apiKey}&q=${location}&dt=${date}`;
+          const url = `https://api.weatherapi.com/v1/history.json?key=${apiKey}&q=${location}&dt=${date}`;
           promises.push(fetch(url).then((res) => res.json()));
         }
         
