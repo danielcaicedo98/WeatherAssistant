@@ -44,7 +44,7 @@ export function WeatherAssistant() {
       id: "suggestions", 
       label: "Sugerencias", 
       icon: <Sun className="w-6 h-6" />,
-      response: <Sugestions/>
+      response: <Sugestions />
      },
      { 
       id: "history", 

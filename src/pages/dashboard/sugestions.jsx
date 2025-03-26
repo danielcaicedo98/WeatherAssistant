@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Card, Button, Typography } from "@material-tailwind/react";
 import { ArrowLeft, CloudRain, Sun, Cloud, Umbrella } from "lucide-react";
+import { responderConsultaClima } from "../../configs/chatbot/gemini";
 
 const Message = ({ text, sender, time }) => {
   return (
@@ -34,6 +35,52 @@ const TypingIndicator = () => (
 );
 
 const Suggestions = ({ setScreen, weatherData }) => {
+  const [weather, setWeather] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Función para formatear la fecha como "YYYY-MM-DD"
+  const getDateString = (date) => date.toISOString().split('T')[0];
+
+  // Fecha de hoy
+  const today = new Date();
+  // Usamos hace dos días como fecha final para asegurarnos de que el día esté completo
+  const endDate = new Date(today);
+  endDate.setDate(today.getDate() - 2);
+  // Fecha de inicio: 7 días atrás (incluyendo el día final, se obtienen 7 días completos)
+  const startDate = new Date(today);
+  startDate.setDate(today.getDate() - 8);
+
+
+  const start_date_str = getDateString(startDate);
+  const end_date_str = getDateString(endDate);
+
+  // Coordenadas aproximadas de Cali, Colombia
+  const latitude = 3.4516;
+  const longitude = -76.5320;
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        // URL del endpoint histórico de Open-Meteo
+        const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}&start_date=${start_date_str}&end_date=${end_date_str}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=America%2FBogota`;
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Error al obtener los datos del clima');
+        }
+        const data = await response.json();
+
+        setWeather(data.daily);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchWeather();
+  }, [start_date_str, end_date_str, latitude, longitude]);
+
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -103,25 +150,30 @@ const Suggestions = ({ setScreen, weatherData }) => {
     }
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputValue.trim()) {
+
       const newUserMessage = {
         id: messages.length + 1,
         text: inputValue,
         sender: "user",
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      };
+      }
+
 
       setMessages(prev => [...prev, newUserMessage]);
       setInputValue('');
       setIsTyping(true);
+
+      const AiResponse = await responderConsultaClima(inputValue, JSON.stringify(weather));
+      console.log({ AiResponse });
 
       setTimeout(() => {
         const botResponse = getSuggestionBasedOnWeather(inputValue);
         
         const newBotMessage = {
           id: messages.length + 2,
-          text: botResponse,
+          text: AiResponse,
           sender: "bot",
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         };
