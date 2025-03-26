@@ -38,7 +38,7 @@ describe("weatherService", () => {
 
             expect(fetch).toHaveBeenCalledTimes(1);
             expect(fetch).toHaveBeenCalledWith(
-                "http://api.weatherapi.com/v1/current.json?key=15d4466459384ee996c03456251103&q=Cali&lang=es"
+                "https://api.weatherapi.com/v1/current.json?key=15d4466459384ee996c03456251103&q=Cali&lang=es"
             );
             expect(result).toEqual({
                 temperature: 25,
