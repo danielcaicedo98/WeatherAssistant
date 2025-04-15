@@ -148,15 +148,15 @@ export function Configurator() {
           <hr />
           <div className="my-8 flex flex-col gap-4">
             <a
-              href="https://www.creative-tim.com/product/material-tailwind-dashboard-react?rel=mtdr"
+              href="/dashboard/user_manual"
               target="_black"
             >
               <Button variant="gradient" fullWidth>
-                Free Download
+                Manual de Usuario
               </Button>
             </a>
             <a
-              href="https://www.material-tailwind.com/docs/react/installation?rel=mtdr"
+              href="/dashboard/user_manual"
               target="_black"
             >
               <Button variant="outlined" color="blue-gray" fullWidth>
