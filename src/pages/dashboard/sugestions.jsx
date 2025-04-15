@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Card, Button, Typography } from "@material-tailwind/react";
 import { ArrowLeft, CloudRain, Sun, Cloud, Umbrella, Mic } from "lucide-react";
 import { responderConsultaClima } from "../../configs/chatbot/gemini";
-import { useSpeechRecognition } from "../../hooks/useSpeechRecognition";
+import { useTextToSpeech } from "../../hooks/useTextToSpeech";
 import { useLocalWhisper } from "../../hooks/useLocalWhisper";
 
 const Message = ({ text, sender, time }) => {
@@ -102,6 +102,8 @@ const Suggestions = ({ setScreen, weatherData }) => {
       setTimeout(() => handleSendMessage(), 100);
     },
   });
+  const { speak } = useTextToSpeech();
+
 
   useEffect(() => {
     scrollToBottom();
@@ -177,6 +179,7 @@ const Suggestions = ({ setScreen, weatherData }) => {
 
       const AiResponse = await responderConsultaClima(inputValue, JSON.stringify(weather));
       console.log({ AiResponse });
+      speak(AiResponse);
 
       setTimeout(() => {
         const botResponse = getSuggestionBasedOnWeather(inputValue);
@@ -192,6 +195,8 @@ const Suggestions = ({ setScreen, weatherData }) => {
         setIsTyping(false);
       }, 1000 + Math.random() * 2000);
     }
+
+
   };
 
   return (
