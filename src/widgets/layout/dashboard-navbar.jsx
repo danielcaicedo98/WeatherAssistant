@@ -25,6 +25,7 @@ import {
   setOpenConfigurator,
   setOpenSidenav,
 } from "@/context";
+import SmartAssistant from "@/pages/dashboard/smart_assistant";
 
 export function DashboardNavbar() {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -72,6 +73,7 @@ export function DashboardNavbar() {
           </Typography>
         </div>
         <div className="flex items-center">
+        <SmartAssistant/>
           <div className="mr-auto md:mr-4 md:w-56">
             <Input label="Search" />
           </div>
