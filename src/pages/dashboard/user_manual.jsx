@@ -19,6 +19,24 @@ const UserManual = () => {
       </section>
 
       <section>
+        <h2 className="text-2xl font-semibold mb-2">🎙️ Asistente Inteligente por Voz</h2>
+        <p>
+          La aplicación cuenta con un asistente por voz que permite interactuar con el sistema mediante comandos hablados. Puedes:
+        </p>
+        <ul className="list-disc list-inside ml-4 mt-2">
+          <li>Consultar el clima actual diciendo <strong>"clima actual"</strong></li>
+          <li>Pedir el pronóstico del día siguiente con <strong>"pronóstico para mañana"</strong></li>
+          <li>Navegar entre secciones como <strong>"ir al inicio"</strong></li>
+          <li>Navegar al asistente interactivo <strong>"abrir asistente"</strong></li>
+          <li>Para abrir el menú de atydas <strong>"abrir ayuda"</strong></li>
+          <li>Escuchar un resumen generado con inteligencia artificial de la situación climática.</li>
+        </ul>
+        <p className="mt-2">
+          Este asistente usa reconocimiento de voz y síntesis de habla para responderte de forma natural. Puedes activarlo tocando el botón de micrófono verde.
+        </p>
+      </section>
+
+      <section>
         <h2 className="text-2xl font-semibold mb-2">☀️ Consulta del Clima Actual</h2>
         <p>
           Muestra en tiempo real el clima actual en Cali. Esta funcionalidad permite saber si hace sol, está nublado o llueve, facilitando la decisión sobre qué ropa usar. Solo debes abrir la aplicación y verás una tarjeta con el estado del clima actualizado.
@@ -45,22 +63,6 @@ const UserManual = () => {
           Brinda recomendaciones inteligentes usando IA. Por ejemplo, si está lloviendo, la app podría sugerir: “¡Abrigate! está lloviendo”. Estas sugerencias aparecen junto al reporte del clima del día y ayudan a tomar mejores decisiones al vestirse o salir.
         </p>
       </section>
-
-      {/* <section>
-        <h2 className="text-2xl font-semibold mb-2">📍 Consulta por Zonas de Cali</h2>
-        <p>
-          Permite conocer el clima en sectores o barrios específicos de Cali. Útil si te mueves por distintas zonas. Puedes escribir el nombre del barrio y ver el clima local exacto en esa área.
-        </p>
-      </section>
-*/}
-{/*  
-      <section>
-        <h2 className="text-2xl font-semibold mb-2">⭐ Registro de Preferencias del Usuario (Opcional)</h2>
-        <p>
-          Guarda las preferencias del usuario, como el tipo de alertas que quiere recibir o sus zonas favoritas. Esto permite una experiencia más personalizada en futuras visitas. Se activa automáticamente al iniciar sesión.
-        </p>
-      </section> */}
-
       <section>
         <h2 className="text-2xl font-semibold mb-2">📊 Consulta Histórica del Clima (últimos 7 días)</h2>
         <p>
@@ -74,13 +76,6 @@ const UserManual = () => {
           Envia alertas automáticas al usuario si se detectan condiciones críticas, como una temperatura muy baja o alta probabilidad de lluvia. Aparecen en tiempo real si tienes las notificaciones activadas en la app.
         </p>
       </section>
-
-      {/* <section>
-        <h2 className="text-2xl font-semibold mb-2">🔐 Inicio de Sesión con Firebase</h2>
-        <p>
-          Permite al usuario iniciar sesión con su cuenta (Google, email, etc.). Al ingresar, puede acceder a sus configuraciones, zonas favoritas y preferencias personalizadas guardadas previamente.
-        </p>
-      </section> */}
     </div>
   );
 };
