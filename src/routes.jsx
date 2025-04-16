@@ -29,12 +29,12 @@ export const routes = [
         path: "/assistant",
         element: <WeatherAssistant />,
       },
-      {
-        icon: <InformationCircleIcon {...icon} />,
-        name: "Asistente por voz",
-        path: "/smart_assistant",
-        element: <SmartAssistant />,
-      },
+      // {
+      //   icon: <InformationCircleIcon {...icon} />,
+      //   name: "Asistente por voz",
+      //   path: "/smart_assistant",
+      //   element: <SmartAssistant />,
+      // },
       {
         icon: <InformationCircleIcon {...icon} />,
         name: "Manual de usuario",
