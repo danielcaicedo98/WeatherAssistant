@@ -8,13 +8,16 @@ app = FastAPI()
 # Permitir conexión desde el frontend local
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # cambia si usas otro puerto
+    allow_origins=[
+        "https://weather-assistant-liart.vercel.app"
+    ],  # cambia si usas otro puerto
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # Carga el modelo Whisper
 model = WhisperModel("base", compute_type="int8")
+
 
 @app.post("/transcribe")
 async def transcribe_audio(audio: UploadFile = File(...)):
