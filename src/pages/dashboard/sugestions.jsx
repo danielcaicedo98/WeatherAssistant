@@ -1,14 +1,16 @@
 import { useState, useRef, useEffect } from "react";
 import { Card, Button, Typography } from "@material-tailwind/react";
-import { ArrowLeft, CloudRain, Sun, Cloud, Umbrella } from "lucide-react";
+import { ArrowLeft, CloudRain, Sun, Cloud, Umbrella, Mic } from "lucide-react";
 import { responderConsultaClima } from "../../configs/chatbot/gemini";
+import { useTextToSpeech } from "../../hooks/useTextToSpeech";
+import { useLocalWhisper } from "../../hooks/useLocalWhisper";
 
 const Message = ({ text, sender, time }) => {
   return (
     <div className={`flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-      <div 
-        className={`max-w-xs p-3 rounded-lg flex flex-col ${sender === 'user' 
-          ? 'bg-white text-gray-800 rounded-br-none border border-gray-200' 
+      <div
+        className={`max-w-xs p-3 rounded-lg flex flex-col ${sender === 'user'
+          ? 'bg-white text-gray-800 rounded-br-none border border-gray-200'
           : 'bg-gray-100 text-gray-800 rounded-bl-none border border-gray-200'}`}
       >
         <Typography variant="small" className="font-normal">
@@ -93,6 +95,16 @@ const Suggestions = ({ setScreen, weatherData }) => {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
 
+  // 
+  const { startRecording, stopRecording, isRecording } = useLocalWhisper({
+    onTranscript: (text) => {
+      setInputValue(text);
+      setTimeout(() => handleSendMessage(), 100);
+    },
+  });
+  const { speak } = useTextToSpeech();
+
+
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -112,7 +124,7 @@ const Suggestions = ({ setScreen, weatherData }) => {
     const rainProb = weatherData?.rainProbability || 87;
     const tempMax = weatherData?.tempMax || 29.3;
     const tempMin = weatherData?.tempMin || 14.6;
-    
+
     if (userInput.toLowerCase().includes('ropa') || userInput.toLowerCase().includes('vestir')) {
       if (rainProb > 70) {
         return "Te recomiendo usar ropa impermeable y calzado resistente al agua. No olvides un paraguas.";
@@ -167,10 +179,11 @@ const Suggestions = ({ setScreen, weatherData }) => {
 
       const AiResponse = await responderConsultaClima(inputValue, JSON.stringify(weather));
       console.log({ AiResponse });
+      speak(AiResponse);
 
       setTimeout(() => {
         const botResponse = getSuggestionBasedOnWeather(inputValue);
-        
+
         const newBotMessage = {
           id: messages.length + 2,
           text: AiResponse,
@@ -182,6 +195,8 @@ const Suggestions = ({ setScreen, weatherData }) => {
         setIsTyping(false);
       }, 1000 + Math.random() * 2000);
     }
+
+
   };
 
   return (
@@ -194,7 +209,7 @@ const Suggestions = ({ setScreen, weatherData }) => {
               Sugerencias - {weatherData?.city || "Cali"}
             </Typography>
           </div>
-          
+
           <div className="mt-3 text-sm grid grid-cols-2 gap-2 text-white">
             <div>
               <Typography variant="small" className="font-semibold">
@@ -223,11 +238,11 @@ const Suggestions = ({ setScreen, weatherData }) => {
         </div>
         <div className="h-64 overflow-y-auto mb-4 space-y-3">
           {messages.map((message) => (
-            <Message 
-              key={message.id} 
-              text={message.text} 
-              sender={message.sender} 
-              time={message.time} 
+            <Message
+              key={message.id}
+              text={message.text}
+              sender={message.sender}
+              time={message.time}
             />
           ))}
           {isTyping && <TypingIndicator />}
@@ -242,12 +257,18 @@ const Suggestions = ({ setScreen, weatherData }) => {
             className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 bg-white text-gray-800"
             onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
           />
-          <Button 
+          <Button
             onClick={handleSendMessage}
             className="bg-white text-blue-500 hover:bg-gray-100 hover:text-blue-600"
             disabled={!inputValue.trim()}
           >
             Enviar
+          </Button>
+          <Button
+            onClick={isRecording ? stopRecording : startRecording}
+            className={`bg-white ${isRecording ? "text-red-500" : "text-blue-500"} hover:bg-gray-100`}
+          >
+            🎙️
           </Button>
         </div>
       </Card>
