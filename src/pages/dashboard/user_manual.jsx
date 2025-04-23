@@ -20,7 +20,19 @@ const UserManual = () => {
 
       <section>
         <h2 className="text-2xl font-semibold mb-2">🎙️ Asistente Inteligente por Voz</h2>
-        <img src="https://firebasestorage.googleapis.com/v0/b/ecstorage-72e4f.appspot.com/o/CM%2Fhomewa.png?alt=media&token=ae4f3722-6b28-473a-b695-ba1380e52cb8" alt="imagen" />
+        <div className="flex flex-wrap gap-4">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/ecstorage-72e4f.appspot.com/o/CM%2Fhomewa.png?alt=media&token=ae4f3722-6b28-473a-b695-ba1380e52cb8"
+            alt="imagen"
+            className="border shadow-md rounded max-w-full w-64"
+          />
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/ecstorage-72e4f.appspot.com/o/ecommerce%2Fmicrochat.png?alt=media&token=48d5ac00-c85e-41ea-a63b-39f3678567f0"
+            alt="imagen"
+            className="border shadow-md rounded max-w-full w-64"
+          />
+        </div>
+
         <p>
           La aplicación cuenta con un asistente por voz que permite interactuar con el sistema mediante comandos hablados. Puedes:
         </p>
@@ -29,12 +41,17 @@ const UserManual = () => {
           <li>Pedir el pronóstico del día siguiente con <strong>"pronóstico para mañana"</strong></li>
           <li>Navegar entre secciones como <strong>"ir al inicio"</strong></li>
           <li>Navegar al asistente interactivo <strong>"abrir asistente"</strong></li>
-          <li>Para abrir el menú de atydas <strong>"abrir ayuda"</strong></li>
+          <li>Para abrir el menú de ayudas <strong>"abrir ayuda"</strong></li>
           <li>Escuchar un resumen generado con inteligencia artificial de la situación climática.</li>
+          <li>Interactuar con el chat de sugerencias usando el micrófono</li>
+
         </ul>
+
+
         <p className="mt-2">
           Este asistente usa reconocimiento de voz y síntesis de habla para responderte de forma natural. Puedes activarlo tocando el botón de micrófono verde.
         </p>
+
       </section>
 
       <section>
