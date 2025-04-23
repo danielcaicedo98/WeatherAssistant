@@ -20,6 +20,7 @@ const UserManual = () => {
 
       <section>
         <h2 className="text-2xl font-semibold mb-2">🎙️ Asistente Inteligente por Voz</h2>
+        <img src="https://firebasestorage.googleapis.com/v0/b/ecstorage-72e4f.appspot.com/o/CM%2Fhomewa.png?alt=media&token=ae4f3722-6b28-473a-b695-ba1380e52cb8" alt="imagen" />
         <p>
           La aplicación cuenta con un asistente por voz que permite interactuar con el sistema mediante comandos hablados. Puedes:
         </p>
